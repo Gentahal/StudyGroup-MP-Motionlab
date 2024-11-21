@@ -1,7 +1,7 @@
 # Git Basics with Motion Lab
 
 Hi! My name is **Genta Halilintar**, and I'm an intern at **Motion Lab**.  
-I'm excited to share my knowledge with you about **Git**.
+I'm excited to share my knowledge with you about **Study with Motion Lab**.
 
 This guide covers essential Git commands to help you manage and collaborate on projects using version control. Perfect for beginners!
 
@@ -41,4 +41,4 @@ To clone a Git repository using SSH, use the following command:
 
 ---
 
-Happy to be here and Enjoy with Git! 🚀
+Happy to be here and Enjoy with My Code! 🚀
