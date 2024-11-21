@@ -1,4 +1,4 @@
-# Git Basics with Motion Lab
+# Study Group with Motion Lab
 
 Hi! My name is **Genta Halilintar**, and I'm an intern at **Motion Lab**.  
 I'm excited to share my knowledge with you about **Study with Motion Lab**.
