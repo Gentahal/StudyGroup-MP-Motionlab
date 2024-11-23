@@ -2,6 +2,7 @@ package com.example.firstapp_motion
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -39,7 +40,14 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Berhasil", Toast.LENGTH_SHORT).show()
 
+                // Simpan sesi login di SharedPreferences
+                val sharedPreferences: SharedPreferences = getSharedPreferences("USER_SESSION", MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("USERNAME", username)
+                editor.apply()
+
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("USERNAME", username)
                 startActivity(
                     intent
                 )

@@ -2,7 +2,7 @@ package com.example.firstapp_motion
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -21,23 +21,34 @@ class HomeActivity : AppCompatActivity() {
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val welcomeTextView = findViewById<TextView>(R.id.tv_welcome)
+        val username = intent.getStringExtra("USERNAME") // Ambil data USERNAME dari intent
+
+        welcomeTextView.text = "Welcome To Motion Lab, $username!"
 
         bottomNavigationView.selectedItemId = R.id.navigation_home
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
+                    true
+                }
 
-                    true
-                }
                 R.id.navigation_search -> {
-                    startActivity(Intent(this, SearchActivity::class.java))
+                    val intent = Intent(this, SearchActivity::class.java)
+                    intent.putExtra("USERNAME", username)
+                    startActivity(intent)
                     true
                 }
+
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
+                    // Pindah ke ProfileActivity sambil mengirim data USERNAME
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    intent.putExtra("USERNAME", username)
+                    startActivity(intent)
                     true
                 }
+
                 else -> false
             }
         }

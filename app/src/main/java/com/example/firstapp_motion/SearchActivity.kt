@@ -19,24 +19,32 @@ class SearchActivity : AppCompatActivity() {
             insets
         }
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        // Ambil username dari intent
+        val username = intent.getStringExtra("USERNAME")
 
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.navigation_search
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_search -> {
+                    true
+                }
 
-                    true
-                }
                 R.id.navigation_home -> {
-                    startActivity(Intent(this, HomeActivity::class.java))
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.putExtra("USERNAME", username)  // Pastikan USERNAME dikirim
+                    startActivity(intent)
                     true
                 }
+
                 R.id.navigation_profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    intent.putExtra("USERNAME", username)  // Pastikan USERNAME dikirim
+                    startActivity(intent)
                     true
                 }
+
                 else -> false
             }
         }
