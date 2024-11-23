@@ -65,9 +65,8 @@ Here I create a simple application with login, profile, home, and search feature
   - Ensure there are no errors in the project by building it. You can build the project by clicking on Build > Make Project.
 
 6. Run the Application
-  - Once everything is set up, you can run the app either on an emulator or a physical device:
-
-Click the Run button (green triangle) in the Android Studio toolbar.
-Select the device/emulator you want to run the app on.
-The app should now build and run on your selected device.
+- Once everything is set up, you can run the app either on an emulator or a physical device:
+- Click the Run button (green triangle) in the Android Studio toolbar.
+- Select the device/emulator you want to run the app on.
+- The app should now build and run on your selected device.
 
