@@ -3,7 +3,6 @@ package com.example.jcmotion
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,9 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -39,13 +35,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
-
 @Composable
-fun LoginScreen(navController: NavController) {
+fun RegisterScreen(navController: NavController) {
     var context = LocalContext.current
-    var username by remember { mutableStateOf("") } //menampung data username
+    var username by remember { mutableStateOf("") } // Menampung data username
+    var email by remember { mutableStateOf("") } // Menampung data email
     var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var confirmPasswordVisible by remember { mutableStateOf(false) }
 
     Scaffold(modifier = Modifier.fillMaxSize(), content = {
         Column(
@@ -79,7 +77,22 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            TextField(modifier = Modifier.fillMaxWidth(),
+            TextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Email") },
+                colors = TextFieldDefaults.colors(
+                    focusedLabelColor = Color.Red,
+                    focusedIndicatorColor = Color.Red,
+                    unfocusedIndicatorColor = Color.Red
+                ),
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            TextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
@@ -97,40 +110,71 @@ fun LoginScreen(navController: NavController) {
                             contentDescription = "Toggle Password Visibility"
                         )
                     }
-                })
+                }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            TextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it },
+                label = {
+                    Text("Confirm Password")
+                },
+                colors = TextFieldDefaults.colors(
+                    focusedLabelColor = Color.Red,
+                    focusedIndicatorColor = Color.Red,
+                    unfocusedIndicatorColor = Color.Red
+                ),
+                visualTransformation = if (confirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                trailingIcon = {
+                    val icon = if (confirmPasswordVisible) R.drawable.visible_off else R.drawable.visible
+                    IconButton(onClick = {confirmPasswordVisible = !confirmPasswordVisible}) {
+                        Icon(
+                            painter = painterResource(id = icon),
+                            contentDescription = "Toggle confirm password disible"
+                        )
+                    }
+                }
+            )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    val sharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putString("username", username).apply()
+                    if (password != confirmPassword) {
+                        Toast.makeText(context, "Pasword tidak sesuai", Toast.LENGTH_SHORT).show()
+                        return@Button
+                    }
+                    val sharedPreferences =
+                        context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putString("username", username)
+                        .putString("email", email).apply()
                     Toast.makeText(
-                        context, "Anda berhasil login", Toast.LENGTH_SHORT
+                        context, "Registrasi berhasil", Toast.LENGTH_SHORT
                     ).show()
 
-                    navController.navigate(HomeScreen)
+                    navController.navigate(LoginScreen)
                 },
+                enabled = username.isNotBlank() && email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Red, contentColor = Color.White
                 ),
             ) {
                 Text(
-                    text = "Login",
+                    text = "Register",
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Belum punya akun? Daftar di sini",
+                text = "Sudah punya akun? Login di sini",
                 color = Color.Blue,
-                modifier = Modifier.clickable {
-                    navController.navigate(RegisterScreen)
-                }
+                modifier = Modifier.padding(top = 8.dp)
             )
-
         }
     })
 }

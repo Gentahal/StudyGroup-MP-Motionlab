@@ -40,6 +40,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.jcmotion.ui.theme.JcMotionTheme
+import com.example.onlinelearning.HomeScreen
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
@@ -59,6 +60,12 @@ class MainActivity : ComponentActivity() {
                     composable<HomeScreen> {
                         HomeScreen(navController)
                     }
+                    composable<ProfileScreen> {
+                        ProfileScreen(navController)
+                    }
+                    composable<RegisterScreen> {
+                        RegisterScreen(navController)
+                    }
                 }
 
             }
@@ -71,5 +78,11 @@ object LoginScreen
 
 @Serializable
 object HomeScreen
+
+@Serializable
+object ProfileScreen
+
+@Serializable
+object RegisterScreen
 
 
