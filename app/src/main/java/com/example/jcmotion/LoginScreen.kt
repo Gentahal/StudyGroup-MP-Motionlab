@@ -104,13 +104,23 @@ fun LoginScreen(navController: NavController) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    val sharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putString("username", username).apply()
-                    Toast.makeText(
-                        context, "Anda berhasil login", Toast.LENGTH_SHORT
-                    ).show()
+                    val sharedPreferences =
+                        context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                    val registerUsername = sharedPreferences.getString("registered_username", null)
+                    val registerPassword = sharedPreferences.getString("registered_password", null)
+                    val email = sharedPreferences.getString("email", null)
 
-                    navController.navigate(HomeScreen)
+                    if (username.isBlank() || password.isBlank()) {
+                        Toast.makeText(context, "Masukan Username & Password", Toast.LENGTH_SHORT)
+                            .show()
+                    } else if (username == registerUsername && password == registerPassword) {
+                        sharedPreferences.edit().putString("username", username)
+                            .putString("password", password).apply()
+                        Toast.makeText(context, "Anda berhasil login", Toast.LENGTH_SHORT).show()
+                        navController.navigate(HomeScreen)
+                    } else {
+                        Toast.makeText(context, "Username dan password salah! ", Toast.LENGTH_SHORT).show()
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Red, contentColor = Color.White

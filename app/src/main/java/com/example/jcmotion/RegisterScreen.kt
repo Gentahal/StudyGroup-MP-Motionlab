@@ -3,6 +3,7 @@ package com.example.jcmotion
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -129,8 +130,9 @@ fun RegisterScreen(navController: NavController) {
                 ),
                 visualTransformation = if (confirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    val icon = if (confirmPasswordVisible) R.drawable.visible_off else R.drawable.visible
-                    IconButton(onClick = {confirmPasswordVisible = !confirmPasswordVisible}) {
+                    val icon =
+                        if (confirmPasswordVisible) R.drawable.visible_off else R.drawable.visible
+                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
                         Icon(
                             painter = painterResource(id = icon),
                             contentDescription = "Toggle confirm password disible"
@@ -147,18 +149,21 @@ fun RegisterScreen(navController: NavController) {
                     if (password != confirmPassword) {
                         Toast.makeText(context, "Pasword tidak sesuai", Toast.LENGTH_SHORT).show()
                         return@Button
-                    }
-                    val sharedPreferences =
-                        context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putString("username", username)
-                        .putString("email", email).apply()
-                    Toast.makeText(
-                        context, "Registrasi berhasil", Toast.LENGTH_SHORT
-                    ).show()
+                    } else if (username.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+                        Toast.makeText(context, "Masukan data register", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val sharedPreferences =
+                            context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                        sharedPreferences.edit().putString("registered_username", username).putString("registered_password", password)
+                            .putString("email", email).apply()
+                        Toast.makeText(
+                            context, "Registrasi berhasil", Toast.LENGTH_SHORT
+                        ).show()
 
-                    navController.navigate(LoginScreen)
+                        navController.navigate(LoginScreen)
+                    }
                 },
-                enabled = username.isNotBlank() && email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank(),
+//                enabled = username.isNotBlank() && email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Red, contentColor = Color.White
                 ),
@@ -173,7 +178,11 @@ fun RegisterScreen(navController: NavController) {
             Text(
                 text = "Sudah punya akun? Login di sini",
                 color = Color.Blue,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .clickable {
+                        navController.navigate(LoginScreen)
+                    }
             )
         }
     })

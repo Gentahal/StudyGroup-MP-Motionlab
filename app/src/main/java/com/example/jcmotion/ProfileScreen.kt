@@ -1,6 +1,7 @@
 package com.example.jcmotion
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -111,7 +112,12 @@ fun ProfileScreen(navController: NavController) {
 
             // Logout Button
             Button(
-                onClick = { /* Logout action */ },
+                onClick = {
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.apply()
+                    navController.navigate(LoginScreen)
+                },
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
                     .fillMaxWidth(0.6f)
@@ -121,6 +127,7 @@ fun ProfileScreen(navController: NavController) {
                     contentColor = MaterialTheme.colorScheme.onError
                 )
             ) {
+                Toast.makeText(context, "Anda Logout", Toast.LENGTH_SHORT).show()
                 Text(text = "Logout", style = MaterialTheme.typography.labelLarge)
             }
         }
