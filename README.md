@@ -4,36 +4,41 @@ Here I create a simple application with login, register, home, and profile featu
 
 ## Feature
 
-### 1. **Login Pengguna**
+### 1. **Login Features**
    - Users can login with their desired username.
    <div style="display: flex;">
-     <img src="app/src/main/res/drawable/doc1.jpeg" width="200" style="margin-right: 10px;"/>
-     <img src="app/src/main/res/drawable/doc2.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/doc1.jpg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc5.jpg" width="200"/>
+     <img src="app/src/main/res/drawable/doc6.jpg" width="200"/>
    </div>
 
-### 2. **Welcoming Home (Home Page)**
+### 2. **Register Features**
+   - Before entering the application and logging in, users must register an account to enter the user page.
    <div style="display: flex;">
-     <img src="app/src/main/res/drawable/doc3.jpeg" width="200" style="margin-right: 10px;"/>
-     <img src="app/src/main/res/drawable/doc4.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/doc2.jpg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc4.jpg" width="200"/>
+     <img src="app/src/main/res/drawable/doc3.jpg" width="200"/>
+   </div>   
+
+### 3. **Welcoming Home (Home Page)**
+   - In this home UI, I designed it to be similar to the UI of most online learning classes.
+   <div style="display: flex;">
+     <img src="app/src/main/res/drawable/doc7.jpg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc8.jpg" width="200"/>
+     <img src="app/src/main/res/drawable/doc9.jpg" width="200"/>
    </div> 
 
-### 3. **Profile Status (Profile Page)**
+### 4. **Profile Status (Profile Page)**
    - Here users can see their profile status (dummy data). And there is a logout button for users who want to change accounts.
    - and then it will return to the login page
    <div style="display: flex;">
-     <img src="app/src/main/res/drawable/doc5.jpeg" width="200" style="margin-right: 10px;"/>
-     <img src="app/src/main/res/drawable/doc6.jpeg" width="200"/>
-   </div>
-
-### 4. **Seacrh Page (Coming soon)**
-   <div style="display: flex;">
-     <img src="app/src/main/res/drawable/doc7.jpeg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc10.jpg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc11.jpg" width="200"/>
    </div>
 
 ## Technology Used
 - **Kotlin** 
-- **XML 5** 
-- **Intent**
+- **Jetpack Compose**
 
 ## Instalation
 1. Clone this repository:
@@ -70,3 +75,6 @@ Here I create a simple application with login, register, home, and profile featu
 - Select the device/emulator you want to run the app on.
 - The app should now build and run on your selected device.
 
+---
+
+Happy to be here and Enjoy with My Code! 🚀
