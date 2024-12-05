@@ -1,4 +1,4 @@
-package com.example.jcmotion
+package com.example.jcmotion.feature
 
 import android.content.Context
 import android.widget.Toast
@@ -32,9 +32,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jcmotion.R
 
 @Composable
 fun RegisterScreen(navController: NavController) {
@@ -160,7 +160,7 @@ fun RegisterScreen(navController: NavController) {
                             context, "Registrasi berhasil", Toast.LENGTH_SHORT
                         ).show()
 
-                        navController.navigate(LoginScreen)
+                        navController.navigate(com.example.jcmotion.LoginScreen)
                     }
                 },
 //                enabled = username.isNotBlank() && email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank(),
@@ -181,7 +181,7 @@ fun RegisterScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .clickable {
-                        navController.navigate(LoginScreen)
+                        navController.navigate(com.example.jcmotion.LoginScreen)
                     }
             )
         }

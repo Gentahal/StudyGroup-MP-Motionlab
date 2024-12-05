@@ -1,4 +1,4 @@
-package com.example.jcmotion
+package com.example.jcmotion.feature
 
 import android.content.Context
 import android.widget.Toast
@@ -20,8 +20,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jcmotion.R
 
 @Composable
 fun ProfileScreen(navController: NavController) {
@@ -116,7 +118,7 @@ fun ProfileScreen(navController: NavController) {
                     val editor = sharedPreferences.edit()
                     editor.clear()
                     editor.apply()
-                    navController.navigate(LoginScreen)
+                    navController.navigate(com.example.jcmotion.LoginScreen)
                 },
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
@@ -128,7 +130,7 @@ fun ProfileScreen(navController: NavController) {
                 )
             ) {
                 Toast.makeText(context, "Anda Logout", Toast.LENGTH_SHORT).show()
-                Text(text = "Logout", style = MaterialTheme.typography.labelLarge)
+                Text(text = "Logout")
             }
         }
     }
@@ -149,4 +151,10 @@ fun ProfileInfoRow(label: String, value: String) {
             style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.primary)
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewProfileScreen() {
+    ProfileScreen(navController = NavController(LocalContext.current))
 }
