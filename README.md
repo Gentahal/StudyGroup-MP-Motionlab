@@ -1,6 +1,7 @@
 # Layouting with Jetpack Compose
 
 Here I create a simple application with login, register, home, and profile features. The application UI that I made is like an online learning UI.
+With Bottom Navigation Bar in Home page.
 
 ## Feature
 
@@ -26,6 +27,8 @@ Here I create a simple application with login, register, home, and profile featu
      <img src="app/src/main/res/drawable/doc7.jpg" width="200" style="margin-right: 10px;"/>
      <img src="app/src/main/res/drawable/doc8.jpg" width="200"/>
      <img src="app/src/main/res/drawable/doc9.jpg" width="200"/>
+     <img src="app/src/main/res/drawable/navbar_1.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/navbar_2.jpeg" width="200"/>
    </div> 
 
 ### 4. **Profile Status (Profile Page)**
