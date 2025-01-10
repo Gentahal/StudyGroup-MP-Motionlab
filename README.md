@@ -1,6 +1,120 @@
-# Layouting with Jetpack Compose
+# Navigation & Route
 
 Here I create a simple application with login, register, home, and profile features. The application UI that I made is like an online learning UI.
+
+**Navigation** and **Route** in Android Jetpack Compose are essential components of modern application architecture that simplify managing navigation between screens in a declarative UI-based application. Here's a complete explanation:
+
+---
+
+### 1. **Navigation in Jetpack Compose**
+Jetpack Compose uses the **Navigation** library to manage screen-to-screen navigation. This library replaces fragments and enables composable-based navigation more straightforwardly.
+
+#### Key Components in Navigation:
+1. **NavHost**: 
+   - A container where all navigation routes are defined.
+   - Acts as the host for screens (composables).
+   - Example:
+     ```kotlin
+     NavHost(navController, startDestination = "home") {
+         composable("home") { HomeScreen() }
+         composable("profile") { ProfileScreen() }
+     }
+     ```
+
+2. **NavController**:
+   - An object used to control navigation, such as switching between screens or going back.
+   - Example:
+     ```kotlin
+     val navController = rememberNavController()
+     ```
+
+3. **Composable**:
+   - Represents a screen or a part of the UI in the application.
+   - Defined with a unique route name inside `NavHost`.
+
+4. **Routes**:
+   - Unique identifiers (strings) used to determine each screen.
+   - Example: `"home"`, `"profile/{userId}"`.
+
+---
+
+### 2. **Route**
+Routes are used to assign unique names to each composable in the `NavHost`. These routes can also have parameters for passing data between screens.
+
+#### Using Routes:
+1. **Static Routes**:
+   - Do not require parameters.
+   - Example:
+     ```kotlin
+     NavHost(navController, startDestination = "home") {
+         composable("home") { HomeScreen() }
+     }
+     ```
+
+2. **Dynamic Routes** (with arguments):
+   - Used for navigation with parameters.
+   - Example:
+     ```kotlin
+     NavHost(navController, startDestination = "home") {
+         composable("profile/{userId}") { backStackEntry ->
+             val userId = backStackEntry.arguments?.getString("userId")
+             ProfileScreen(userId)
+         }
+     }
+     ```
+
+   - Navigating to a dynamic route:
+     ```kotlin
+     navController.navigate("profile/123")
+     ```
+
+---
+
+### 3. **Screen-to-Screen Navigation**
+To move between screens, use `NavController` with the `navigate()` method.
+
+#### Example:
+```kotlin
+@Composable
+fun HomeScreen(navController: NavController) {
+    Button(onClick = { navController.navigate("profile/123") }) {
+        Text("Go to Profile")
+    }
+}
+
+@Composable
+fun ProfileScreen(userId: String?) {
+    Text("Welcome, User ID: $userId")
+}
+```
+
+---
+
+### 4. **Back Navigation**
+Use the `popBackStack()` method on `NavController` to return to the previous screen.
+
+#### Example:
+```kotlin
+Button(onClick = { navController.popBackStack() }) {
+    Text("Back")
+}
+```
+
+---
+
+### 5. **Arguments & Deep Linking**
+Jetpack Compose Navigation supports arguments and deep linking:
+- **Arguments**: To pass data between screens.
+- **Deep Link**: To open the app directly to a specific screen using a URL.
+
+---
+
+### Advantages of Navigation in Jetpack Compose:
+- Declarative: Defined directly in Kotlin code, without additional XML.
+- Simple: Navigation is more intuitive compared to fragments.
+- Supports deep linking, animations, and arguments effortlessly.
+
+With Navigation & Route in Jetpack Compose, managing navigation becomes more organized, scalable, and closely aligned with the declarative paradigm of Compose.
 
 ## Feature
 
