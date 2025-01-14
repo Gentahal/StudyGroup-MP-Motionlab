@@ -1,6 +1,8 @@
-# Layouting with Jetpack Compose
+# Firebase
 
-Here I create a simple application with login, register, home, and profile features. The application UI that I made is like an online learning UI.
+This document provides an overview of how Firebase is utilized in the Notes application to manage backend functionalities seamlessly and efficiently.
+
+Firebase is a comprehensive backend-as-a-service (BaaS) platform provided by Google. It simplifies the development process by offering pre-built services such as authentication, real-time databases, and cloud functions. In this Notes application, Firebase powers core features such as user authentication, data storage, and file management.
 
 ## Feature
 
@@ -36,9 +38,18 @@ Here I create a simple application with login, register, home, and profile featu
      <img src="app/src/main/res/drawable/doc11.jpg" width="200"/>
    </div>
 
+### 5. **Notes Screen (add & delete notes)**
+   - In this feature, users can create/save notes, and also delete their notes.
+   <div style="display: flex;">
+     <img src="app/src/main/res/drawable/doc_notes1.jpeg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc_notes2.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/doc_notes3.jpeg" width="200"/>
+   </div>  
+
 ## Technology Used
 - **Kotlin** 
 - **Jetpack Compose**
+- **FIREBASE**
 
 ## Instalation
 1. Clone this repository:
