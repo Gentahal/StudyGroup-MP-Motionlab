@@ -48,6 +48,7 @@ fun MainScreen(navController: NavController) {
 
     val screens = listOf(
         NavigationItem("Home", Icons.Filled.Home, Icons.Outlined.Home),
+        NavigationItem("Notes", Icons.Filled.AccountCircle, Icons.Filled.AccountCircle),
         NavigationItem("Settings", Icons.Filled.Settings, Icons.Outlined.Settings),
         NavigationItem("Profile", Icons.Filled.Person, Icons.Outlined.Person)
     )
@@ -86,8 +87,9 @@ fun MainScreen(navController: NavController) {
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedItemIndex) {
                 0 -> HomeScreen(navController = navController)
-                1 -> SettingsScreen(navController = navController)
-                2 -> ProfileScreen(navController = navController)
+                1 -> NotesScreen(navController = navController)
+                2 -> SettingsScreen(navController = navController)
+                3 -> ProfileScreen(navController = navController)
             }
         }
     }

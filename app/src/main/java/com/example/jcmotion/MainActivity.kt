@@ -8,14 +8,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.jcmotion.feature.BookDetailScreen
+import com.example.jcmotion.feature.*
 import com.example.jcmotion.ui.theme.JcMotionTheme
-import com.example.jcmotion.feature.HomeScreen
-import com.example.jcmotion.feature.LoginScreen
-import com.example.jcmotion.feature.MainScreen
-import com.example.jcmotion.feature.ProfileScreen
-import com.example.jcmotion.feature.RegisterScreen
-import com.example.jcmotion.feature.SettingsScreen
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +22,7 @@ class MainActivity : ComponentActivity() {
                 NavHost(
                     navController = navController,
                     startDestination = LoginScreen,
-                ){
+                ) {
                     composable<LoginScreen> {
                         LoginScreen(navController)
                     }
@@ -47,12 +41,14 @@ class MainActivity : ComponentActivity() {
                     composable<SettingsScreen> {
                         SettingsScreen(navController)
                     }
+                    composable<NotesScreen> {
+                        NotesScreen(navController)
+                    }
                     composable<BookDetail> {
                         val args = it.toRoute<BookDetail>()
                         BookDetailScreen(args)
                     }
                 }
-
             }
         }
     }
@@ -77,6 +73,7 @@ object RegisterScreen
 object SettingsScreen
 
 @Serializable
-data class BookDetail(val bookTitle : String, val bookDesc : String)
+object NotesScreen
 
-
+@Serializable
+data class BookDetail(val bookTitle: String, val bookDesc: String)

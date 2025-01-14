@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.jcmotion" />
+                  <option name="mobileSdkAppId" value="1:689765556219:android:ac4a528e3d95d2d6f0755e" />
+                  <option name="projectId" value="sg-motion-eb83c" />
+                  <option name="projectNumber" value="689765556219" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
