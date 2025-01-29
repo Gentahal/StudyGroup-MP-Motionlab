@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = LoginScreen,
+                    startDestination = LoginScreen, // Pastikan ada login dulu
                 ) {
                     composable<LoginScreen> {
                         LoginScreen(navController)
@@ -48,32 +48,22 @@ class MainActivity : ComponentActivity() {
                         val args = it.toRoute<BookDetail>()
                         BookDetailScreen(args)
                     }
+                    composable("CatFactScreen") {
+                        CatFactScreen()
+                    }
                 }
             }
         }
     }
 }
 
-@Serializable
-object MainScreen
+@Serializable object MainScreen
+@Serializable object LoginScreen
+@Serializable object HomeScreen
+@Serializable object ProfileScreen
+@Serializable object RegisterScreen
+@Serializable object SettingsScreen
+@Serializable object NotesScreen
+@Serializable object CatFactScreen
+@Serializable data class BookDetail(val bookTitle: String, val bookDesc: String)
 
-@Serializable
-object LoginScreen
-
-@Serializable
-object HomeScreen
-
-@Serializable
-object ProfileScreen
-
-@Serializable
-object RegisterScreen
-
-@Serializable
-object SettingsScreen
-
-@Serializable
-object NotesScreen
-
-@Serializable
-data class BookDetail(val bookTitle: String, val bookDesc: String)

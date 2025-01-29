@@ -65,11 +65,11 @@ fun HomeScreen(navController: NavController) {
     )
 
     val courses = listOf(
-        "Introduction to Kotlin",
+        "Cat Fact",
         "Advanced Android Development",
         "UI/UX Design Basics",
         "Machine Learning Essentials",
-        "Data Structures and Algorithms"
+        "Data Structures and Algorithms",
     )
 
     Scaffold(
@@ -184,27 +184,19 @@ fun HomeScreen(navController: NavController) {
                                     .padding(16.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Image(
-                                    painter = painterResource(id = com.example.jcmotion.R.drawable.motion_logo),
-                                    contentDescription = "Course Icon",
-                                    modifier = Modifier
-                                        .size(48.dp)
-                                        .background(
-                                            color = Color.Red,
-                                            shape = MaterialTheme.shapes.small
-                                        )
-                                        .padding(8.dp)
-                                )
-
-                                Spacer(modifier = Modifier.width(16.dp))
-
                                 Text(
                                     text = course,
                                     style = MaterialTheme.typography.bodyLarge,
                                     color = Color.Black,
                                     maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.weight(1f)
                                 )
+                                if (course == "Cat Fact") {
+                                    Button(onClick = { navController.navigate("CatFactScreen") }) {
+                                        Text("Read")
+                                    }
+                                }
                             }
                         }
                     }

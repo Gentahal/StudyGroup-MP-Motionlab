@@ -44,6 +44,8 @@ dependencies {
 //    implementation("androidx.compose.material3:material3:1.3.1")
 //    implementation("androidx.compose.material3:material3-window-size-class:1.3.1")
 //    implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.4.0-alpha05")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.androidx.material3.v110alpha06)
     implementation(libs.material3)
     implementation(libs.kotlinx.serialization.json)
@@ -66,4 +68,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
 }
