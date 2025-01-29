@@ -1,8 +1,70 @@
-# Layouting with Jetpack Compose
+# Retrofit for Fetching Cat Facts
 
-Here I create a simple application with login, register, home, and profile features. The application UI that I made is like an online learning UI.
+This document provides an overview of how Retrofit is utilized to fetch random cat facts from an API efficiently in an Android application.
 
-## Feature
+---
+
+## Introduction
+Retrofit is a type-safe HTTP client for Android and Java, which simplifies network requests by converting API responses into Java objects. In this project, we use Retrofit to fetch random cat facts from the `https://catfact.ninja/fact` API and display them in the application.
+
+---
+
+## Dependencies
+To use Retrofit in your Android project, add the following dependencies to your `build.gradle` (Module: app):
+
+```gradle
+implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+```
+
+Additionally, ensure you have `Gson` for JSON parsing:
+
+```gradle
+implementation 'com.google.code.gson:gson:2.8.9'
+```
+
+---
+
+## Project Configuration
+
+1. **Create API Interface**
+   Define an interface to specify the API endpoints.
+
+   ```java
+   import retrofit2.Call;
+   import retrofit2.http.GET;
+
+   public interface CatFactApi {
+       @GET("fact")
+       Call<CatFact> getCatFact();
+   }
+   ```
+
+2. **Model Class**
+   Create a model class to map the JSON response.
+
+   ```java
+   import com.google.gson.annotations.SerializedName;
+
+   public class CatFact {
+       @SerializedName("fact")
+       private String fact;
+
+       public String getFact() {
+           return fact;
+       }
+   }
+   ```
+---
+
+## Conclusion
+Retrofit simplifies API integration in Android applications by providing a clean and efficient way to fetch and parse data. By implementing Retrofit in this project, we can easily retrieve and display random cat facts from an API.
+
+For more details, visit the [Retrofit Documentation](https://square.github.io/retrofit/).
+
+
+
+## Implement
 
 ### 1. **Login Features**
    - Users can login with their desired username.
@@ -36,9 +98,28 @@ Here I create a simple application with login, register, home, and profile featu
      <img src="app/src/main/res/drawable/doc11.jpg" width="200"/>
    </div>
 
+### 5. **Notes Screen (add & delete notes)**
+   - In this feature, users can create/save notes, and also delete their notes.
+   <div style="display: flex;">
+     <img src="app/src/main/res/drawable/doc_notes1.jpeg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc_notes2.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/doc_notes3.jpeg" width="200"/>
+   </div>  
+
+### 6. **Cat Fact (screen)**
+   - Here, users can see data about facts about cats that are taken from the API..
+   <div style="display: flex;">
+     <img src="app/src/main/res/drawable/fetch_1.jpeg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/fetch_2.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/fetch_3.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/fetch_4.jpeg" width="200"/>
+   </div>     
+
 ## Technology Used
 - **Kotlin** 
 - **Jetpack Compose**
+- **FIREBASE**
+- **Retrofit**
 
 ## Instalation
 1. Clone this repository:
