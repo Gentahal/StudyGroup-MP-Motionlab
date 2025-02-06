@@ -14,7 +14,7 @@ This task aims to understand and implement **Local Storage** using **Room Databa
 - **Android Studio**
 - **Jetpack Compose**
 - **Room Database**
-- **ViewModel & LiveData** (Optional)
+- **ViewModel & LiveData**
 
 ## 📂 Project Structure
 ```
