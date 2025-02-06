@@ -1,8 +1,108 @@
-# Layouting with Jetpack Compose
+# 📋 Local Storage with Room
 
-Here I create a simple application with login, register, home, and profile features. The application UI that I made is like an online learning UI.
+## 📌 Description
+This task aims to understand and implement **Local Storage** using **Room Database** in Android. Room is a Jetpack library that simplifies SQLite usage with an object-oriented abstraction.
 
-## Feature
+## 🎯 Learning Objectives
+- Understand the concept of **Room Database** in Android.
+- Use **Entity, DAO, and Database** to store data locally.
+- Manage CRUD (Create, Read, Update, Delete) operations with Room.
+- Display data from the Room database using Jetpack Compose.
+
+## 🛠️ Technologies Used
+- **Kotlin**
+- **Android Studio**
+- **Jetpack Compose**
+- **Room Database**
+- **ViewModel & LiveData** (Optional)
+
+## 📂 Project Structure
+```
+📂 app
+ ├── 📂 data
+ │    ├── Entity.kt
+ │    ├── Dao.kt
+ │    ├── AppDatabase.kt
+ ├── 📂 ui
+ │    ├── MainScreen.kt
+ │    ├── AddScreen.kt
+ ├── 📂 viewmodel
+ │    ├── DataViewModel.kt
+```
+
+## 🚀 Implementation
+### 1️⃣ Add Room Dependency in `build.gradle`
+```gradle
+dependencies {
+    implementation "androidx.room:room-runtime:2.5.0"
+    kapt "androidx.room:room-compiler:2.5.0"
+}
+```
+
+### 2️⃣ Create Entity
+```kotlin
+@Entity(tableName = "users")
+data class User(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val name: String,
+    val email: String
+)
+```
+
+### 3️⃣ Create DAO (Data Access Object)
+```kotlin
+@Dao
+interface UserDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUser(user: User)
+
+    @Query("SELECT * FROM users")
+    fun getAllUsers(): Flow<List<User>>
+
+    @Delete
+    suspend fun deleteUser(user: User)
+}
+```
+
+### 4️⃣ Create Database
+```kotlin
+@Database(entities = [User::class], version = 1)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun userDao(): UserDao
+}
+```
+
+### 5️⃣ Using Room in ViewModel
+```kotlin
+class UserViewModel(application: Application) : AndroidViewModel(application) {
+    private val db = Room.databaseBuilder(
+        application,
+        AppDatabase::class.java, "app_db"
+    ).build()
+    private val userDao = db.userDao()
+
+    val users: Flow<List<User>> = userDao.getAllUsers()
+    
+    fun addUser(user: User) = viewModelScope.launch {
+        userDao.insertUser(user)
+    }
+}
+```
+
+### 6️⃣ Display Data in Jetpack Compose
+```kotlin
+@Composable
+fun UserList(viewModel: UserViewModel) {
+    val users by viewModel.users.collectAsState(initial = emptyList())
+    LazyColumn {
+        items(users) { user ->
+            Text(text = "${user.name} - ${user.email}")
+        }
+    }
+}
+```
+
+## Implement
 
 ### 1. **Login Features**
    - Users can login with their desired username.
@@ -36,45 +136,37 @@ Here I create a simple application with login, register, home, and profile featu
      <img src="app/src/main/res/drawable/doc11.jpg" width="200"/>
    </div>
 
-## Technology Used
-- **Kotlin** 
-- **Jetpack Compose**
+### 5. **Notes Screen (add & delete notes)**
+   - In this feature, users can create/save notes, and also delete their notes.
+   <div style="display: flex;">
+     <img src="app/src/main/res/drawable/doc_notes1.jpeg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/doc_notes2.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/doc_notes3.jpeg" width="200"/>
+   </div>  
 
-## Instalation
-1. Clone this repository:
+### 6. **Cat Fact (screen)**
+   - Here, users can see data about facts about cats that are taken from the API..
+   <div style="display: flex;">
+     <img src="app/src/main/res/drawable/fetch_1.jpeg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/fetch_2.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/fetch_3.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/fetch_4.jpeg" width="200"/>
+   </div> 
 
-   ```bash
-   https://github.com/Gentahal/StudyGroup-MP-Motionlab.git
+### 6. **Weather (screen)**
+   - Here, implement the feature roomDB using weather API
+   <div style="display: flex;">
+     <img src="app/src/main/res/drawable/room_1.jpeg" width="200" style="margin-right: 10px;"/>
+     <img src="app/src/main/res/drawable/room_2.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/room_3.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/room_4.jpeg" width="200"/>
+     <img src="app/src/main/res/drawable/room_5.jpeg" width="200"/>
+   </div>
+   
 
-2. Open the project in Android Studio
-
-  - Open Android Studio.
-  - Click on Open an existing Android Studio project.
-  - Navigate to the project directory and select it to open.
-
-3. Sync Gradle
-  - Once the project is opened in Android Studio, you’ll need to sync the project with Gradle. This will download any dependencies specified in the project.
-  - Click on File > Sync Project with Gradle Files.
-
-4. Configure Android Emulator or Connect a Device
-  - Using an Emulator:
-  - In Android Studio, click on the AVD Manager (Android Virtual Device) icon.
-  - Create a new virtual device or use an existing one.
-  - Choose a device specification (such as Pixel 4) and a system image.
-  - Click Start to launch the emulator.
-  - Using a Physical Device:
-  - Enable Developer Options and USB Debugging on your Android device.
-  - Connect your device via USB.
-  - Confirm any prompts on your device to allow debugging.
-5. Build the Project
-  - Ensure there are no errors in the project by building it. You can build the project by clicking on Build > Make Project.
-
-6. Run the Application
-- Once everything is set up, you can run the app either on an emulator or a physical device:
-- Click the Run button (green triangle) in the Android Studio toolbar.
-- Select the device/emulator you want to run the app on.
-- The app should now build and run on your selected device.
+## 📌 Conclusion
+This task provides an understanding of how to store and manage data locally in an Android application using **Room Database**. Completing this task will enhance your knowledge of local database operations in Android.
 
 ---
+🚀 **Enjoy with my Code!** 🚀
 
-Happy to be here and Enjoy with My Code! 🚀
