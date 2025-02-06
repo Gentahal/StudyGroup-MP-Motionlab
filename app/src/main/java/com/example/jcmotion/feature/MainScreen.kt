@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
@@ -40,7 +41,8 @@ fun MainScreen(navController: NavController) {
         NavigationItem("Home", Icons.Filled.Home, Icons.Outlined.Home),
         NavigationItem("Notes", Icons.Filled.AccountCircle, Icons.Filled.AccountCircle),
         NavigationItem("Settings", Icons.Filled.Settings, Icons.Outlined.Settings),
-        NavigationItem("Profile", Icons.Filled.Person, Icons.Outlined.Person)
+        NavigationItem("Profile", Icons.Filled.Person, Icons.Outlined.Person),
+        NavigationItem("Weather", Icons.Filled.Info, Icons.Outlined.Info)
     )
 
     Scaffold(
@@ -68,6 +70,9 @@ fun MainScreen(navController: NavController) {
                         selected = selectedItemIndex == index,
                         onClick = {
                             selectedItemIndex = index
+                            when (index) {
+                                4 -> navController.navigate("WeatherScreen") // Navigasi ke WeatherScreen
+                            }
                         }
                     )
                 }

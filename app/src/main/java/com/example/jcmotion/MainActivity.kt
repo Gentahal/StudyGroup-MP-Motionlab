@@ -51,6 +51,9 @@ class MainActivity : ComponentActivity() {
                     composable("CatFactScreen") {
                         CatFactScreen()
                     }
+                    composable("WeatherScreen") {
+                        WeatherScreen(navController)
+                    }
                 }
             }
         }
